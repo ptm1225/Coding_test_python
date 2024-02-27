@@ -1,35 +1,24 @@
 a, b = map(int, input().split())
 
-def is_prime(n):
-    if n < 2:
-        return False
-    elif n == 2:
-        return True
-    else:
-        for i in range(2, int(n**0.5)+1):
-            if n % i == 0:
-                return False
-        return True
+prime_list = [False] + [True] * b
+prime_list[1] = False
+
+for i in range(2, int(b**0.5)+1):
+    if prime_list[i]:
+        for j in range(i*i, b+1, i):
+            prime_list[j] = False
 
 answer = 0
-prime_list = [i for i in range(b+1) if is_prime(i)]
-
 for n in range(a, b+1):
-    if n in prime_list:
-        continue
+    count = 0
+    for i in range(2, int(n**0.5) + 1):
+        while n % i == 0:
+            n //= i
+            count += 1
+    if n != 1:
+        count += 1
     
-    else:
-        arr = []
-        i = 0
-        while n != 1:
-            if n % prime_list[i] == 0:
-                arr.append(prime_list[i])
-                n //= prime_list[i]
-                i = 0
-            else:
-                i += 1
-        
-        if is_prime(len(arr)):
-            answer += 1
-
+    if prime_list[count]:
+        answer += 1
+    
 print(answer)
