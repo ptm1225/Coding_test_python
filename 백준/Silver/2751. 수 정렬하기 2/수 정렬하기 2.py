@@ -1,6 +1,10 @@
 arr = []
 for _ in range(int(input())):
     arr.append(int(input()))
-arr.sort()
+num = [False] * (2*(10**6) + 1)
 for a in arr:
-    print(a)
+    num[10**6 + a] = True
+
+for i in range(-(10**6), (10**6) + 1):
+    if num[10**6 + i]:
+        print(i)
