@@ -1,0 +1,17 @@
+from collections import deque
+n = int(input())
+arr = []
+for _ in range(n):
+    arr.append(input())
+
+for s in arr:
+    stack = deque()
+    for i in s:
+        if stack and stack[-1] == '(' and i == ')':
+            stack.pop()
+        else:
+            stack.append(i)
+    if stack:
+        print('NO')
+    else:
+        print('YES')
