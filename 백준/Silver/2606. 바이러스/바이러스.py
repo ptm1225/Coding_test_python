@@ -1,18 +1,17 @@
-from collections import deque
-n=int(input())
-v=int(input())
-graph = [[] for i in range(n+1)]
-visited=[0]*(n+1)
-for i in range(v):
-    a,b=map(int,input().split())
-    graph[a]+=[b]
-    graph[b]+=[a]
-visited[1]=1
-Q=deque([1])
-while Q:
-    c=Q.popleft()
-    for nx in graph[c]:
-        if visited[nx]==0:
-            Q.append(nx)
-            visited[nx]=1
+n = int(input())
+arr = [[] for _ in range(n+1)]
+for _ in range(int(input())):
+    u, v = map(int, input().split())
+    arr[u].append(v)
+    arr[v].append(u)
+
+queue = [1]
+visited = [False]*(n+1)
+while queue:
+    v = queue.pop(0)
+    if not visited[v]:
+        visited[v] = True
+        for i in arr[v]:
+            if not visited[i]:
+                queue.append(i)
 print(sum(visited)-1)
