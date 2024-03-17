@@ -14,10 +14,20 @@ for _ in range(t):
         if v == b:
             ans = s
             break
-        if not visited[v]:
-            visited[v] = True
-            q.append((2*v if 2*v <= 9999 else (2*v)%10000, s+'D'))
-            q.append((v-1 if v != 0 else 9999, s+'S'))
-            q.append((v*10 if len(str(v)) < 4 else (v%1000)*10 + v//1000, s+'L'))
-            q.append(((v%10)*1000 + v//10, s+'R'))
+        D = 2*v if 2*v <= 9999 else (2*v)%10000
+        S = v-1 if v != 0 else 9999
+        L = (v%1000)*10 + v//1000
+        R = (v%10)*1000 + v//10
+        if not visited[D]:
+            visited[D] = True
+            q.append((D, s+'D'))
+        if not visited[S]:
+            visited[S] = True
+            q.append((S, s+'S'))
+        if not visited[L]:
+            visited[L] = True
+            q.append((L, s+'L'))
+        if not visited[R]:
+            visited[R] = True
+            q.append((R, s+'R'))
     print(ans)
