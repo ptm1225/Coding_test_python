@@ -1,8 +1,11 @@
+import sys
+from collections import deque
+input = sys.stdin.readline
 n = int(input())
-stack = []
+stack = deque()
 arr = []
 for _ in range(n):
-    arr.append(input().split())
+    arr.append(input().rstrip().split())
 for x in arr:
     if x[0] == '1':
         stack.append(x[1])
