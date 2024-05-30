@@ -1,16 +1,17 @@
+import sys
+input = sys.stdin.readline
+
 n, m = map(int, input().split())
-tree = list(map(int, input().split()))
-s = sum(tree)
+height = list(map(int, input().split()))
 
-left = 0
-right = max(tree)
+i, j = 0, max(height)
 
-while left <= right:
-    mid = (left+right)//2
-    d = sum([i-mid for i in tree if i > mid])
-    if d < m:
-        right = mid - 1
+while i <= j:
+    mid = (i+j)//2
+    s = sum([h-mid for h in height if h-mid > 0])
+    
+    if s < m:
+        j = mid - 1
     else:
-        left = mid + 1
-
-print(right)
+        i = mid + 1
+print(j)
