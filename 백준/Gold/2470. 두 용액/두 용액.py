@@ -1,22 +1,22 @@
 import sys
 input = sys.stdin.readline
 
-n = int(input())
+N = int(input())
 arr = list(map(int, input().split()))
 arr.sort()
-i, j = 0, n-1
-left, right = arr[i], arr[j]
+i, j = 0, N-1
+a, b = arr[i], arr[j]
 
 while i < j:
-    t = arr[i] + arr[j]
-    if abs(t) < abs(left+right):
-        left, right = arr[i], arr[j]
-    if t < 0:
-        i += 1
-    elif t > 0:
-        j -= 1
-    else:
-        ans = t
-        break
+    x = arr[i] + arr[j]
+    if abs(x) < abs(a+b):
+        a, b = arr[i], arr[j]
     
-print(left, right)
+    if x > 0:
+        j -= 1
+    elif x < 0:
+        i += 1
+    else:
+        break
+
+print(a, b)
