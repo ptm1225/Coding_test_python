@@ -1,34 +1,23 @@
-import sys
-input = sys.stdin.readline
+V, E = map(int, input().split())
 
-V, E = map(int, input().rstrip().split())
-edge = []
-for _ in range(E):
-    edge.append(tuple(map(int, input().split())))
-edge.sort(key=lambda x: x[2])
+s = list(range(V+1))
+edges = sorted([tuple(map(int, input().split())) for _ in range(E)], key=lambda x:x[2])
+total = 0
 
-s = [i for i in range(V + 1)]
+def f(x):
+    if x == s[x]:
+        return x
+    return s[x]
 
-def find(v):
-    if v == s[v]:
-        return v
-    else:
-        s[v] = find(s[v])
-        return s[v]
-
-def union(a, b):
-    a = find(a)
-    b = find(b)
-    if a != b:
-        if a < b:
-            s[b] = a
+for a,b,c in edges:
+    fa, fb = f(a), f(b)
+    if fa != fb:
+        if fa < fb:
+            pass
         else:
-            s[a] = b
-
-cnt = 0
-for e in edge:
-    u, v, w = e
-    if find(u) != find(v):
-        union(u, v)
-        cnt += w
-print(cnt)
+            fa, fb = fb, fa
+        for i, v in enumerate(s):
+            if v == fb:
+                s[i] = fa
+        total += c
+print(total)
